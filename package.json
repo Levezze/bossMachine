@@ -1,0 +1,40 @@
+{
+  "name": "build-apis-boss-machine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "cross-env PORT=8000 mocha --watch",
+    "build": "tsc",
+    "start-dev": "webpack -w & nodemon --watch server --ext ts --exec ts-node server/api/index.ts",
+    "start": "nodemon --watch dist/server/api/index.js --watch server/"
+  },
+  "author": "Codecademy",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^9.6.0",
+    "@reduxjs/toolkit": "^2.6.1",
+    "axios": "^1.6.5",
+    "body-parser": "^1.20.2",
+    "chai": "^4.3.9",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "morgan": "^1.10.0",
+    "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.9",
+    "nodemon": "^3.1.9",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.30.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
