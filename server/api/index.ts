@@ -1,11 +1,8 @@
-const express = require('express');
-const apiRouter = express.Router();
-const { getAllFromDatabase } = require('../db')
+import express from 'express';
+import { minionsRouter } from './minions'; 
+import { meetingsRouter } from './meetings';
 
-apiRouter.get('/minions', (req, res, next) => {
+export const apiRouter = express.Router();
 
-})
-
-
-
-module.exports = apiRouter;
+apiRouter.use('/minions', minionsRouter);
+apiRouter.use('/meetings', meetingsRouter);
