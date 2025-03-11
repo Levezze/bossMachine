@@ -7,6 +7,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["server/**/*.ts"],
+  "include": ["src/**/*.ts", "src/checkMillionDollarIdea.js"],
   "exclude": ["node_modules", "dist"]
 }

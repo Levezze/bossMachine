@@ -1,14 +1,14 @@
 import express from 'express';
-import { findDataArrayByName } from '../../db';
+import { findDataArrayByName } from '../db';
 
-export const minionsRouter = express.Router();
+const router = express.Router();
 
-minionsRouter.use('/', minionsRouter, (_req, _res, next) => {
+router.use('/', router, (_req, _res, next) => {
   console.log('Route /api/minions accessed');
   next();
 });
 
-// minionsRouter.param('resource', (req, res, next, resource) => {
+// router.param('resource', (req, res, next, resource) => {
 //   if (resource === 'meetings') {
 //     const meetings = findDataArrayByName(resource);
 //     req.meetings = findDataArrayByName(resource)
@@ -16,6 +16,8 @@ minionsRouter.use('/', minionsRouter, (_req, _res, next) => {
 //   next();
 // });
 
-minionsRouter.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
 
 })
+
+export default router;
