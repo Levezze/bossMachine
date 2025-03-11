@@ -1,1 +1,1 @@
-{"root":["../server/api.ts","../server/api/index.ts"],"errors":true,"version":"5.8.2"}
+{"root":["../src/checkmilliondollaridea.ts","../src/db.ts","../src/server.ts","../src/types.ts","../src/middleware/logger.ts","../src/routes/meetings.ts","../src/routes/minions.ts"],"version":"5.8.2"}

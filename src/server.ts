@@ -37,3 +37,5 @@ app.listen(PORT, () => {
   logger.info(`Server is listening on port ${PORT}`);
 });
 // }
+
+export default app;

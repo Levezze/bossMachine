@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const db_1 = require("../db");
 const router = express_1.default.Router();
+router.get('/healthcheck', (_req, res) => {
+    res.sendStatus(200);
+});
 // router.use('/', (_req, _res, next) => {
 //   console.log('Route /api/meetings accessed');
 //   next();
