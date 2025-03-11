@@ -7,7 +7,7 @@
     "test": "cross-env PORT=8000 mocha --watch",
     "build": "tsc --build",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
-    "start": "nodemon --watch dist --ext js --exec node dist/server.js"
+    "start": "npx nodemon --watch dist --ext js --exec node dist/src/server.js"
   },
   "author": "Codecademy",
   "license": "ISC",

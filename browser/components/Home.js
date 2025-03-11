@@ -16,7 +16,7 @@ const Home = () => {
       <div id="launch-buttons">
         <Link to="/minions">
           <div id="minions-launch" className="button launch-button">
-            <img className="button launch-icon" src="public/img/minion_icon_home.svg" alt="Minions" />
+            <img className="button launch-icon" src="/img/minion_icon_home.svg" alt="Minions" />
             <div className="button label launch-label">
               MINIONS.exe
             </div>
@@ -24,7 +24,7 @@ const Home = () => {
         </Link>
         <Link to="/ideas">
           <div id="ideas-launch" className="button launch-button">
-            <img className="button launch-icon" src="public/img/minion_icon_money.svg" alt="Ideas" />
+            <img className="button launch-icon" src="/img/minion_icon_money.svg" alt="Ideas" />
             <div className="button label launch-label">
               MILLION $ IDEAS.exe
             </div>

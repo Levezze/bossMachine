@@ -1,23 +1,33 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { findDataArrayByName } from '../db';
+import logger from '../utils/logger';
 
 const router = express.Router();
 
-router.use('/', router, (_req, _res, next) => {
-  console.log('Route /api/minions accessed');
-  next();
-});
+router.get('/healthcheck', (req: Request, res: Response) => {
+  res.sendStatus(200);
+})
 
-// router.param('resource', (req, res, next, resource) => {
-//   if (resource === 'meetings') {
-//     const meetings = findDataArrayByName(resource);
-//     req.meetings = findDataArrayByName(resource)
-//   }
+interface Minions extends Request {
+  minions?: any;
+}
+
+// router.param('minions', (req: Minions, res: Response, next: NextFunction, minions: string) => {
+//   logger.info(`router param called with: ${minions}`);
+//   const minionData = findDataArrayByName(minions);
+//   logger.info(`Fetched minion data:`, minionData);
+
+//   if (!minionData) return res.status(404).send('Minions data not found');
+//   req.minions = minionData;
 //   next();
 // });
 
-router.get('/', (req, res, next) => {
+router.get('/', (_req: Minions, res: any) => {
+  const minionData = findDataArrayByName('minions');
+  logger.info(`Fetched minion data:`, minionData);
 
-})
+  if (!minionData) return res.status(404).send('Minions data not found');
+  res.status(200).send(minionData);
+});
 
 export default router;

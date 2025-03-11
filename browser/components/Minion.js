@@ -58,7 +58,7 @@ const Minion = ({ newMinion }) => {
       </div>
       <div className="button back-button">
         <button onClick={() => navigate('/minions')}>
-          <img className="button" src="public/img/arrow.svg" alt="Back" />
+          <img className="button" src="/img/arrow.svg" alt="Back" />
         </button>
       </div>
     </div>

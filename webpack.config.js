@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public/js'),
     filename: 'bundle.js',
+    publicPath: '/js/',
   },
   context: __dirname,
   devtool: 'source-map',

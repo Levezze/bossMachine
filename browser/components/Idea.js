@@ -65,7 +65,7 @@ class Idea extends Component {
         </div>
         <div className="button back-button">
           <Link to="/ideas">
-            <img className="button" src="public/img/arrow.svg" />
+            <img className="button" src="/img/arrow.svg" />
           </Link>
         </div>
       </div>

@@ -7,7 +7,7 @@ const Heading = () => {
       
         <div id="logo">
           <Link to="/">
-            <img id="logo-img" className="button" src="public/img/logo.svg" alt="logo" />
+            <img id="logo-img" className="button" src="/img/logo.svg" alt="logo" />
           </Link>
         </div>
         <div id="title">

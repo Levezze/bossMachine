@@ -33,7 +33,7 @@ const AllIdeas = ({ ideas }) => {
               <td />
               <td id="add-idea-td">
                 <Link to="/ideas/new">
-                <img id="add-idea" className="button" src="public/img/add_button.svg" alt="add minion"/>
+                <img id="add-idea" className="button" src="/img/add_button.svg" alt="add minion"/>
                 </Link>
               </td>
             </tr>
@@ -45,7 +45,7 @@ const AllIdeas = ({ ideas }) => {
       </div>
       <div className="button back-button">
         <Link to="/">
-          <img className="button" src="public/img/arrow.svg" />
+          <img className="button" src="/img/arrow.svg" />
         </Link>
       </div>
     </div>

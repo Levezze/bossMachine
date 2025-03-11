@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const request = require('supertest');
 
-const app = require('../dist/src/server');
+const app = require('../dist/src/server').default;
 
 describe('/api/minions routes', function() {
   let fakeDb = require('../dist/src/db.js');

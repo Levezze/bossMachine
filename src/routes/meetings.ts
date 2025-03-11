@@ -25,7 +25,7 @@ router.get('/', (_req: Request, res: Response) => {
   if (!meetings) {
     res.status(404).json({ error: 'Meetings not found' });
   } else {
-  res.status(200).send(meetings.data as Meeting[] | null);
+    res.status(200).send(meetings.data as Meeting[] | null);
   };
 });
 

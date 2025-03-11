@@ -198,7 +198,7 @@ export const db = {
   }
 };
 
-export const findDataArrayByName = (name: any) => {
+export const findDataArrayByName = (name: string) => {
   switch (name) {
     case 'minions': return db.allMinions;
     case 'ideas': return db.allIdeas;

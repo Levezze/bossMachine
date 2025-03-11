@@ -4,18 +4,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const db_1 = require("../db");
+const logger_1 = __importDefault(require("../utils/logger"));
 const router = express_1.default.Router();
-router.use('/', router, (_req, _res, next) => {
-    console.log('Route /api/minions accessed');
-    next();
+router.get('/healthcheck', (req, res) => {
+    res.sendStatus(200);
 });
-// router.param('resource', (req, res, next, resource) => {
-//   if (resource === 'meetings') {
-//     const meetings = findDataArrayByName(resource);
-//     req.meetings = findDataArrayByName(resource)
-//   }
+// router.param('minions', (req: Minions, res: Response, next: NextFunction, minions: string) => {
+//   logger.info(`router param called with: ${minions}`);
+//   const minionData = findDataArrayByName(minions);
+//   logger.info(`Fetched minion data:`, minionData);
+//   if (!minionData) return res.status(404).send('Minions data not found');
+//   req.minions = minionData;
 //   next();
 // });
-router.get('/', (req, res, next) => {
+router.get('/', (_req, res) => {
+    const minionData = (0, db_1.findDataArrayByName)('minions');
+    logger_1.default.info(`Fetched minion data:`, minionData);
+    if (!minionData)
+        return res.status(404).send('Minions data not found');
+    res.status(200).send(minionData);
 });
 exports.default = router;
