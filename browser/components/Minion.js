@@ -19,9 +19,11 @@ const Minion = ({ newMinion }) => {
     setMinionData(minion);
   }, [minion]);
 
-  const handleChange = (e) => {
-    setMinionData({ ...minionData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback(e => {
+  setMinionData({ ...minionData,
+    [e.target.name]: e.target.value
+  });
+});
 
   const toggleEdit = () => {
     if (editing) {

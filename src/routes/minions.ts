@@ -11,19 +11,15 @@ router.get('/healthcheck', (req: Request, res: Response) => {
 router.get('/', (_req: any, res: any) => {
   const minionData = getAllFromDatabase('minions');
   if (!minionData) return res.status(404).send('Minions data not found');
-  console.log(`Fetched minion data:`, minionData);
+  console.log(`Fetched minion data`);
   res.status(200).send(minionData);
 });
 
-router.post('/', (req: any, res: any) => {
-  const newMinion: MinionType = req.body;
-  if (!newMinion.name || !newMinion.title || !newMinion.salary || !newMinion.weaknesses) {
-    return res.status(400).send('Invalid minion data');
-  }
-  addToDatabase('minions', req.body)
-  res.status(200).send(req.body);
+router.post('/', (req, res) => {
+  const newMinion = addToDatabase('minions', req.body);
+  console.log('create minion', newMinion);
+  res.status(201).send(newMinion);
 });
-
 
 router.param('minionId', (req: any, res, next, minionId) => {
   const requestedMinion = getFromDatabaseById('minions', minionId);
