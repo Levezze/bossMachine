@@ -20,6 +20,8 @@ const createMinion = () => {
   };
 };
 
+export type MinionType = ReturnType<typeof createMinion>;
+
 let workIdCounter = 1;
 
 const createWork = (minionId: string) => {
@@ -99,12 +101,12 @@ const allIdeas = new Array(10).fill(0).map(createIdea);
 const allWork = allMinions.map(minion => createWork(minion.id));
 const allMeetings = new Array(3).fill(0).map(createMeeting);
 
-export const testParamType = (param: string | number) => {
+const testParamType = (param: string | number) => {
   return !isNaN(typeof param === 'string' ? parseFloat(param) : param) 
   && isFinite(typeof param === 'number' ? param : parseFloat(param));
 }
 
-export const isValidMinion = (instance: { name: string; weaknesses: string; title: string; salary: string | number; }) => {
+const isValidMinion = (instance: { name: string; weaknesses: string; title: string; salary: string | number; }) => {
   instance.name = instance.name || '';
   instance.weaknesses = instance.weaknesses || '';
   instance.title = instance.title || '';
@@ -120,7 +122,7 @@ export const isValidMinion = (instance: { name: string; weaknesses: string; titl
   return true;
 };
 
-export const isValidIdea = (instance: { name: string; description: string; numWeeks: string | number; weeklyRevenue: string | number; }) => {
+const isValidIdea = (instance: { name: string; description: string; numWeeks: string | number; weeklyRevenue: string | number; }) => {
   instance.name = instance.name || '';
   instance.description = instance.description || '';
   if (typeof instance.name !== 'string' || typeof instance.description !== 'string') {
@@ -139,7 +141,7 @@ export const isValidIdea = (instance: { name: string; description: string; numWe
   return true;
 };
 
-export const isValidWork = (instance: { title: string; description: string; hours: string | number; minionId: string; }) => {
+const isValidWork = (instance: { title: string; description: string; hours: string | number; minionId: string; }) => {
   instance.title = instance.title || '';
   instance.description = instance.description || '';
   if (typeof instance.title !== 'string' || typeof instance.description !== 'string') {
@@ -159,7 +161,7 @@ export const isValidWork = (instance: { title: string; description: string; hour
   return true;
 };
 
-export const isValidMeeting = (instance: { time: string | any[]; date: any; day: any; note: any; }) => {
+const isValidMeeting = (instance: { time: string | any[]; date: any; day: any; note: any; }) => {
   if (typeof instance.time !== 'string' || instance.time.length < 4) {
     throw new Error('Meeting time must be valid!');
   }
@@ -175,7 +177,7 @@ export const isValidMeeting = (instance: { time: string | any[]; date: any; day:
   return true;
 };
 
-export const db = {
+const db = {
   allMinions: {
     data: allMinions,
     nextId: minionIdCounter,
@@ -208,25 +210,83 @@ export const findDataArrayByName = (name: string) => {
   }
 };
 
-export const getAllFromDatabase = (modelType: any) => {
+const getAllFromDatabase = (modelType: any) => {
   const model = findDataArrayByName(modelType);
-  return model ? model.data : null;
-};
+  if (model === null) {
+    return null;
+  }
+  return model.data;
+}
 
-export const getFromDatabaseById = (modelType: any, id: string) => {
+const getFromDatabaseById = (modelType: any, id: any) => {
   const model = findDataArrayByName(modelType);
-  return model ? model.data.find(el => el.id === id) : null;
-};
+  if (model === null) {
+    return null;
+  }
+  return model.data.find((element) => {
+    return element.id === id;
+  });
+}
 
-export const addToDatabase = (modelType: any, instance: { id: string; time: string; date: Date; day: string; note: string; } & { id: string; title: string; description: string; hours: number; minionId: string; } & { id: string; name: string; description: string; weeklyRevenue: number; numWeeks: number; } & {
-    id: string; name: string;
-    title: string; weaknesses: string; salary: number;
-  }) => {
+const addToDatabase = (modelType: any, instance: any) => {
   const model = findDataArrayByName(modelType);
-  if (model && model.isValid(instance)) {
+  if (model === null) {
+    return null;
+  }
+  if (model.isValid(instance)) {
     instance.id = `${model.nextId++}`;
     model.data.push(instance);
-    return instance;
+    return model.data[model.data.length - 1];
   }
-  return null;
+}
+
+const updateInstanceInDatabase = (modelType: any, instance: any) => {
+  const model = findDataArrayByName(modelType);
+  if (model === null) {
+    return null;
+  }
+  const instanceIndex = model.data.findIndex((element) => {
+    return element.id === instance.id;
+  });
+  if (instanceIndex > -1 && model.isValid(instance)) {
+    model.data[instanceIndex] = instance;
+    return model.data[instanceIndex];
+  } else {
+    return null;
+  }
+}
+
+const deleteFromDatabasebyId = (modelType: any, id: any) => {
+  const model = findDataArrayByName(modelType);
+  if (model === null) {
+    return null;
+  }
+  let index = model.data.findIndex((element) => {
+    return element.id === id;
+  });
+  if (index !== -1) {
+    model.data.splice(index, 1);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const deleteAllFromDatabase = (modelType: any) => {
+  const model = findDataArrayByName(modelType);
+  if (model === null) {
+    return null;
+  }
+  model.data = [];
+  return model.data;
+}
+
+export {
+  createMeeting,
+  getAllFromDatabase,
+  getFromDatabaseById,
+  addToDatabase,
+  updateInstanceInDatabase,
+  deleteFromDatabasebyId,
+  deleteAllFromDatabase,
 };

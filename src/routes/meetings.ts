@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { findDataArrayByName } from '../db';
+import { getAllFromDatabase, createMeeting, deleteAllFromDatabase } from '../db';
 import { Meeting, DatabaseCollection } from '../db';
 
 const router = express.Router();
@@ -8,25 +8,25 @@ router.get('/healthcheck', (_req: Request, res: Response) => {
   res.sendStatus(200);
 });
 
-// router.use('/', (_req, _res, next) => {
-//   console.log('Route /api/meetings accessed');
-//   next();
-// });
-
-// router.param('resource', (req, _res, next, resource) => {
-//   if (resource === 'meetings') {
-//     req.meetings = findDataArrayByName(resource) as DatabaseCollection<Meeting>;
-//   }
-//   next();
-// });
-
 router.get('/', (_req: Request, res: Response) => {
-  const meetings = findDataArrayByName('meetings');
+  const meetings = getAllFromDatabase('meetings');
   if (!meetings) {
     res.status(404).json({ error: 'Meetings not found' });
   } else {
-    res.status(200).send(meetings.data as Meeting[] | null);
+    res.status(200).send(meetings as Meeting[] | null);
   };
 });
+
+router.post('/', (_req: Request, res: Response) => {
+  const newMeeting = createMeeting();
+  console.log(`New meeting: \n${newMeeting.date}, ${newMeeting.note}`);
+  res.status(200).send(newMeeting);
+});
+
+router.delete('/', (_req: Request, res: Response) => {
+  deleteAllFromDatabase('meetings');
+  console.log(`deleting all meetings`);
+  res.status(204).send();
+})
 
 export default router;

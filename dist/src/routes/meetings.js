@@ -9,24 +9,24 @@ const router = express_1.default.Router();
 router.get('/healthcheck', (_req, res) => {
     res.sendStatus(200);
 });
-// router.use('/', (_req, _res, next) => {
-//   console.log('Route /api/meetings accessed');
-//   next();
-// });
-// router.param('resource', (req, _res, next, resource) => {
-//   if (resource === 'meetings') {
-//     req.meetings = findDataArrayByName(resource) as DatabaseCollection<Meeting>;
-//   }
-//   next();
-// });
 router.get('/', (_req, res) => {
-    const meetings = (0, db_1.findDataArrayByName)('meetings');
+    const meetings = (0, db_1.getAllFromDatabase)('meetings');
     if (!meetings) {
         res.status(404).json({ error: 'Meetings not found' });
     }
     else {
-        res.status(200).send(meetings.data);
+        res.status(200).send(meetings);
     }
     ;
+});
+router.post('/', (_req, res) => {
+    const newMeeting = (0, db_1.createMeeting)();
+    console.log(`New meeting: \n${newMeeting.date}, ${newMeeting.note}`);
+    res.status(200).send(newMeeting);
+});
+router.delete('/', (_req, res) => {
+    (0, db_1.deleteAllFromDatabase)('meetings');
+    console.log(`deleting all meetings`);
+    res.status(204).send();
 });
 exports.default = router;
