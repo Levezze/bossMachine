@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { getAllFromDatabase, createMeeting, deleteAllFromDatabase } from '../db';
-import { Meeting, DatabaseCollection } from '../db';
+import { getAllFromDatabase, createMeeting, deleteAllFromDatabase, addToDatabase } from '../db';
+import { Meeting } from '../db';
 
 const router = express.Router();
 
@@ -19,8 +19,8 @@ router.get('/', (_req: Request, res: Response) => {
 
 router.post('/', (_req: Request, res: Response) => {
   const newMeeting = createMeeting();
-  console.log(`New meeting: \n${newMeeting.date}, ${newMeeting.note}`);
-  res.status(200).send(newMeeting);
+  addToDatabase('meetings', newMeeting);
+  res.status(201).send(newMeeting);
 });
 
 router.delete('/', (_req: Request, res: Response) => {

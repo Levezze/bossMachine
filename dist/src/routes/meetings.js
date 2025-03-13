@@ -21,8 +21,8 @@ router.get('/', (_req, res) => {
 });
 router.post('/', (_req, res) => {
     const newMeeting = (0, db_1.createMeeting)();
-    console.log(`New meeting: \n${newMeeting.date}, ${newMeeting.note}`);
-    res.status(200).send(newMeeting);
+    (0, db_1.addToDatabase)('meetings', newMeeting);
+    res.status(201).send(newMeeting);
 });
 router.delete('/', (_req, res) => {
     (0, db_1.deleteAllFromDatabase)('meetings');
