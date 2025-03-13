@@ -34,7 +34,6 @@ router.get('/:minionId', (req, res) => {
     res.status(200).send(req.foundMinion);
 });
 router.put('/:minionId', (req, res) => {
-    req.minionId = req.params.minionId;
     (0, db_1.updateInstanceInDatabase)('minions', req.body);
     res.status(200).send(req.body);
 });

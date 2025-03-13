@@ -40,7 +40,6 @@ router.get('/:minionId', (req: any, res) => {
 });
 
 router.put('/:minionId', (req: any, res) => {
-  req.minionId = req.params.minionId;
   updateInstanceInDatabase('minions', req.body);
   res.status(200).send(req.body);
 });
